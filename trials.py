@@ -42,30 +42,34 @@ def get_range(start, stop):
 
 
 def censor_vowels(word):
-    chars = []
     vowel_list = ['a', 'e', 'i', 'o', 'u']
-    str = ""
-    for letter in word:
-        if letter in vowel_list:
-            chars.append('*')
-        else:
-            chars.append(letter)
-    return str.join(chars)
-            
-
+    chars = ['*' if letter in vowel_list else letter for letter in word]
+    return ''.join(chars)
+    
 
 def snake_to_camel(string):
-    camel = []
+    camel_case = ""
+    false = False
     
-    for word in string.split('_'):
-        camel.append(f'{word[0].upper()}{word.split(1)}')
-        
-    return ''.join(camel)
-    pass  # TODO: replace this line with your code
+    for char in string:
+        if char == '_':
+            false = True
+        elif false:
+            camel_case += char.upper()
+            false = False
+        else:
+            camel_case +=  char
+    
+    return camel_case
 
 
 def longest_word_length(words):
-    pass  # TODO: replace this line with your code
+    longest_word = ''
+    for word in words:
+        if len(word) > len(longest_word):
+            longest_word = word
+    return len(longest_word)
+
 
 
 def truncate(string):
